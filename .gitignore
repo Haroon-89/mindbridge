@@ -1,0 +1,39 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Environment variables (NEVER commit this)
+.env
+*.env
+
+# Database
+*.db
+*.sqlite3
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# ChromaDB vector store (will be generated, not committed)
+rag/chroma_db/
+
+# Node (for frontend later)
+node_modules/
+npm-debug.log*
+
+# React build output
+frontend/build/
+frontend/.env
