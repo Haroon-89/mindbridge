@@ -9,6 +9,7 @@ __pycache__/
 # Environment variables (NEVER commit this)
 .env
 *.env
+backend/.env
 
 # Database
 *.db
@@ -29,6 +30,8 @@ Thumbs.db
 
 # ChromaDB vector store (will be generated, not committed)
 rag/chroma_db/
+backend/rag/chroma_db/
+**/chroma_db/
 
 # Node (for frontend later)
 node_modules/
