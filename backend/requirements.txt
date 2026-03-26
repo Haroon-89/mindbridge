@@ -66,6 +66,7 @@ orjson==3.11.7
 ormsgpack==1.12.2
 overrides==7.7.0
 packaging==26.0
+pandas==3.0.1
 protobuf==6.33.6
 psycopg2-binary==2.9.11
 pyasn1==0.6.3
@@ -109,6 +110,7 @@ transformers==5.3.0
 typer==0.24.1
 typing-inspection==0.4.2
 typing_extensions==4.15.0
+tzdata==2025.3
 urllib3==2.6.3
 uuid_utils==0.14.1
 uvicorn==0.42.0
