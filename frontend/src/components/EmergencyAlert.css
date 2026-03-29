@@ -1,0 +1,54 @@
+.emergency-alert {
+  background: linear-gradient(135deg, #c0392b, #a93226);
+  color: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 12px;
+  border: 2px solid rgba(255,255,255,0.15);
+  box-shadow: 0 8px 32px rgba(192, 57, 43, 0.4);
+  animation: pulse 1.5s ease-in-out 3;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 8px 32px rgba(192, 57, 43, 0.4); }
+  50%       { box-shadow: 0 8px 48px rgba(192, 57, 43, 0.7); }
+}
+
+.emergency-header {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.emergency-body {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 14px;
+  background: rgba(0, 0, 0, 0.15);
+  padding: 10px 14px;
+  border-radius: 10px;
+}
+
+.emergency-numbers {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.hotline {
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 8px 14px;
+  border-radius: 10px;
+}
+
+.sms-notice {
+  background: rgba(39, 174, 96, 0.8);
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 6px;
+}
