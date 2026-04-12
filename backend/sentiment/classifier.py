@@ -1,20 +1,21 @@
-from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassification
-import torch
+from transformers import pipeline
 
-# Use distilbert fine-tuned on emotion detection
 MODEL_NAME = "bhadresh-savani/distilbert-base-uncased-emotion"
 
-print("Loading DistilBERT emotion model... (first time takes 1-2 minutes)")
-tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
-model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME)
-classifier_pipeline = pipeline(
-    "text-classification",
-    model=model,
-    tokenizer=tokenizer,
-    return_all_scores=True,
-    device=-1  # CPU mode — safe for your laptop
-)
-print("Model loaded successfully!")
+_classifier_pipeline = None
+
+def _get_pipeline():
+    global _classifier_pipeline
+    if _classifier_pipeline is None:
+        print("Loading DistilBERT emotion model...")
+        _classifier_pipeline = pipeline(
+            "text-classification",
+            model=MODEL_NAME,
+            return_all_scores=True,
+            device=-1
+        )
+        print("Model loaded.")
+    return _classifier_pipeline
 
 # Map model emotion labels to our mood states
 EMOTION_TO_MOOD = {
@@ -62,7 +63,7 @@ def analyze_sentiment(message: str):
     # Step 1 — keyword check first (deterministic, always runs)
     keyword_tier, matched_keyword = check_keywords(message)
 
-    results = classifier_pipeline(message)
+    results = _get_pipeline()(message)
 
     # Handle both possible output formats
     if isinstance(results[0], list):

@@ -1,3 +1,5 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+
 fastapi==0.135.2
 uvicorn==0.42.0
 python-dotenv==1.2.2
@@ -18,9 +20,9 @@ langchain-core==1.2.21
 langchain-google-genai==4.2.1
 
 # Sentiment
-transformers==5.3.0
-torch==2.11.0
-tokenizers==0.22.2
+transformers==4.41.2
+torch==2.3.1+cpu
+tokenizers==0.19.1
 
 # RAG
 chromadb==1.5.5

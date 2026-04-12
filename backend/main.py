@@ -29,16 +29,6 @@ logging.basicConfig(
 # Create DB tables on startup
 create_tables()
 
-# Warm up ChromaDB and sentence-transformers on startup so first request is fast
-import threading
-def _warmup():
-    try:
-        query_knowledge_base("hello", n_results=1)
-        print("ChromaDB warmed up.")
-    except Exception as e:
-        print(f"Warmup warning: {e}")
-threading.Thread(target=_warmup, daemon=True).start()
-
 app = FastAPI(title="MindBridge API")
 
 ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")

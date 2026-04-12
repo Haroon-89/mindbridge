@@ -4,19 +4,22 @@ import os
 
 from rag.cbt_data import cbt_documents
 
-# Always store chroma_db relative to this file, works locally and on Render
 CHROMA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "chroma_db")
 
+_collection = None
 
 def _get_collection():
-    client = chromadb.PersistentClient(path=CHROMA_PATH)
-    embedding_fn = embedding_functions.SentenceTransformerEmbeddingFunction(
-        model_name="all-MiniLM-L6-v2"
-    )
-    return client.get_or_create_collection(
-        name="cbt_knowledge_base",
-        embedding_function=embedding_fn
-    )
+    global _collection
+    if _collection is None:
+        client = chromadb.PersistentClient(path=CHROMA_PATH)
+        embedding_fn = embedding_functions.SentenceTransformerEmbeddingFunction(
+            model_name="all-MiniLM-L6-v2"
+        )
+        _collection = client.get_or_create_collection(
+            name="cbt_knowledge_base",
+            embedding_function=embedding_fn
+        )
+    return _collection
 
 
 def ingest_cbt_data():
