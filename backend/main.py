@@ -10,7 +10,6 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import HumanMessage, SystemMessage
 
 load_dotenv()
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from rag.ingest import query_knowledge_base
 from sentiment.classifier import analyze_sentiment
@@ -42,9 +41,10 @@ threading.Thread(target=_warmup, daemon=True).start()
 
 app = FastAPI(title="MindBridge API")
 
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_methods=["*"],
     allow_headers=["*"],
 )

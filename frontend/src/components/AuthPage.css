@@ -30,7 +30,7 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Logo ── */
+/* Logo */
 .auth-logo {
   display: flex;
   align-items: center;
@@ -67,7 +67,7 @@
 
 .dark .auth-logo-sub { color: #7060a8; }
 
-/* ── Tabs ── */
+/* Tabs */
 .auth-tabs {
   display: flex;
   background: rgba(120, 200, 160, 0.1);
@@ -105,7 +105,7 @@
   box-shadow: 0 2px 12px rgba(90, 50, 180, 0.4);
 }
 
-/* ── Form ── */
+/* Form */
 .auth-form {
   display: flex;
   flex-direction: column;
@@ -203,7 +203,7 @@
 
 .dark .field-hint { color: #a08050; }
 
-/* ── Error ── */
+/* Error */
 .auth-error {
   background: rgba(255, 80, 80, 0.1);
   border: 1px solid rgba(200, 80, 80, 0.25);
@@ -221,7 +221,7 @@
   border-left-color: #c05050;
 }
 
-/* ── Submit button ── */
+/* Submit button */
 .auth-submit {
   padding: 13px;
   border: none;
@@ -263,7 +263,7 @@
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ── Disclaimer ── */
+/* Disclaimer */
 .auth-disclaimer {
   font-size: 11px;
   color: #9abfaa;

@@ -4,7 +4,7 @@
   padding: 0;
 }
 
-/* ── CSS Variables — Light Mode ── */
+/* CSS Variables - Light Mode */
 :root {
   --bg: linear-gradient(160deg, #e8f5f0 0%, #eef4fb 50%, #f5f0fb 100%);
   --bg-solid: #f0f9f4;
@@ -23,7 +23,7 @@
   --tagline: #7aaa90;
 }
 
-/* ── CSS Variables — Dark Mode ── */
+/* CSS Variables - Dark Mode */
 .dark {
   --bg: linear-gradient(160deg, #0d0b1a 0%, #110e2a 40%, #0e1428 100%);
   --bg-solid: #0d0b1a;
@@ -57,7 +57,7 @@ body {
   transition: background 0.4s ease, color 0.4s ease;
 }
 
-/* ── Header ── */
+/* Header */
 .app-header {
   background: var(--header-bg);
   backdrop-filter: blur(14px);
@@ -119,7 +119,7 @@ body {
   transition: color 0.4s;
 }
 
-/* ── Nav tabs ── */
+/* Nav tabs */
 .nav-tabs {
   display: flex;
   gap: 8px;
@@ -155,56 +155,132 @@ body {
   box-shadow: 0 4px 16px rgba(100, 60, 200, 0.4);
 }
 
-/* ── Theme toggle button ── */
-.theme-toggle {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1.5px solid var(--tab-border);
-  background: var(--tab-hover);
-  font-size: 18px;
-  cursor: pointer;
+
+
+/* Theme row inside profile dropdown */
+.profile-theme-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  transition: all 0.25s ease;
-  flex-shrink: 0;
+  justify-content: space-between;
+  padding: 12px 18px;
+  border-bottom: 1px solid rgba(120,200,160,0.15);
 }
 
-.theme-toggle:hover {
-  transform: rotate(20deg) scale(1.1);
-  box-shadow: 0 4px 12px var(--header-shadow);
+.dark .profile-theme-row {
+  border-bottom-color: rgba(120,80,200,0.15);
 }
 
-/* ── Disclaimer ── */
-.header-disclaimer {
-  font-size: 11px;
-  color: var(--disclaimer-color);
-  background: var(--disclaimer-bg);
-  border-top: 1px solid var(--disclaimer-border);
-  padding: 6px 0;
-  text-align: center;
-  font-weight: 500;
-  letter-spacing: 0.1px;
-  transition: all 0.4s;
+.profile-theme-toggle {
+  padding: 6px 14px;
+  border: 1.5px solid var(--tab-border);
+  border-radius: 20px;
+  background: var(--tab-hover);
+  color: var(--tab-color);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-/* ── Main ── */
+.profile-theme-toggle:hover {
+  transform: scale(1.04);
+  box-shadow: 0 3px 10px var(--header-shadow);
+}
+
+
+
+/* New Chat corner button */
+.new-chat-corner {
+  position: fixed;
+  top: 80px;
+  left: 20px;
+  z-index: 99;
+}
+
+.new-chat-sidebar-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, #3a9e72, #5b8dd9);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 3px 14px rgba(58, 158, 114, 0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.dark .new-chat-sidebar-btn {
+  background: linear-gradient(135deg, #7050c0, #4060c0);
+  box-shadow: 0 3px 14px rgba(100, 60, 200, 0.4);
+}
+
+.new-chat-sidebar-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(58, 158, 114, 0.45);
+}
+
+.new-chat-plus {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+/* App body layout */
+.app-body {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+
+/* Main */
 .app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.chat-main-wrap {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-/* ── Footer ── */
+
 .app-footer {
   background: var(--footer-bg);
-  color: var(--footer-color);
-  text-align: center;
-  padding: 14px 24px;
-  font-size: 11px;
-  line-height: 1.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 24px;
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+  transition: all 0.4s;
+}
+
+.footer-disclaimer-icon {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.footer-disclaimer {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--disclaimer-color);
+  background: var(--disclaimer-bg);
+  border: 1px solid var(--disclaimer-border);
+  border-radius: 8px;
+  padding: 7px 16px;
   letter-spacing: 0.2px;
+  line-height: 1.6;
+  text-align: center;
   transition: all 0.4s;
 }
 
@@ -216,6 +292,7 @@ body {
   }
   .app-header { padding: 0 16px; }
   .header-right { width: 100%; justify-content: space-between; }
+  .new-chat-corner { display: none; }
 }
 
 .profile-wrap {

@@ -4,7 +4,7 @@ import InputBar from './InputBar'
 import EmergencyAlert from './EmergencyAlert'
 import './ChatWindow.css'
 
-const API_URL = 'http://localhost:8000'
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
 const CHAR_DELAY = 18 // ms per token chunk — controls typewriter speed
 
 export default function ChatWindow({ messages, setMessages, sessionId, user }) {

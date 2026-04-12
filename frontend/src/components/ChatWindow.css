@@ -24,7 +24,7 @@
   scrollbar-color: #4a3080 transparent;
 }
 
-/* ── Empty state ── */
+/* Empty state */
 .empty-state {
   display: flex;
   flex-direction: column;
@@ -112,7 +112,7 @@
   box-shadow: 0 2px 12px rgba(100, 60, 180, 0.15);
 }
 
-/* ── Typing indicator ── */
+/* Typing indicator */
 .typing-indicator {
   display: flex;
   align-items: center;
@@ -152,7 +152,7 @@
   30%            { transform: translateY(-6px); opacity: 1; }
 }
 
-/* ── Error ── */
+/* Error */
 .error-banner {
   background: #fff5f5;
   border: 1px solid #ffc0c0;

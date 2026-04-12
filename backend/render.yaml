@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: mindbridge-backend
+    runtime: python
+    buildCommand: pip install -r requirements.txt && python rag/ingest.py
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: TWILIO_ACCOUNT_SID
+        sync: false
+      - key: TWILIO_AUTH_TOKEN
+        sync: false
+      - key: TWILIO_PHONE_NUMBER
+        sync: false
+      - key: EMERGENCY_CONTACT_NUMBER
+        sync: false

@@ -13,7 +13,7 @@
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* ── Bubbles ── */
+/* Bubbles */
 .bubble {
   padding: 13px 18px;
   border-radius: 20px;
@@ -23,7 +23,7 @@
   transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
 }
 
-/* Light — user */
+/* Light - user */
 .bubble-user {
   background: linear-gradient(135deg, #3a9e72, #5b8dd9);
   color: #ffffff;
@@ -31,13 +31,13 @@
   box-shadow: 0 4px 16px rgba(58, 158, 114, 0.25);
 }
 
-/* Dark — user */
+/* Dark - user */
 .dark .bubble-user {
   background: linear-gradient(135deg, #6040b0, #4060c0);
   box-shadow: 0 4px 20px rgba(90, 50, 180, 0.4);
 }
 
-/* Light — bot */
+/* Light - bot */
 .bubble-bot {
   background: rgba(255, 255, 255, 0.88);
   color: #2d4a3e;
@@ -47,7 +47,7 @@
   backdrop-filter: blur(8px);
 }
 
-/* Dark — bot */
+/* Dark - bot */
 .dark .bubble-bot {
   background: rgba(22, 16, 48, 0.85);
   color: #c8c0e8;
@@ -61,7 +61,7 @@
   letter-spacing: 0.1px;
 }
 
-/* ── Streaming cursor ── */
+/* Streaming cursor */
 .stream-cursor {
   display: inline-block;
   width: 2px;
@@ -90,7 +90,7 @@
   text-align: right;
 }
 
-/* ── Meta badges ── */
+/* Meta badges */
 .bubble-meta {
   display: flex;
   flex-wrap: wrap;
@@ -141,7 +141,7 @@
   border-color: rgba(60, 160, 100, 0.3);
 }
 
-/* ── Tier 2 banner ── */
+/* Tier 2 banner */
 .tier2-banner {
   margin-top: 8px;
   background: linear-gradient(135deg, #fffbec, #fff8e0);

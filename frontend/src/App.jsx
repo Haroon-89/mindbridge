@@ -4,14 +4,18 @@ import MoodDashboard from './components/MoodDashboard'
 import AuthPage from './components/AuthPage'
 import './App.css'
 
-const SESSION_ID = Math.random().toString(36).substring(2, 12)
+const newSessionId = () => Math.random().toString(36).substring(2, 12)
 const DISCLAIMER = "MindBridge is a first-response support tool. It is NOT a therapist, doctor, or replacement for professional mental health care. If you are in crisis call iCall: 9152987821"
 const API_URL = 'http://localhost:8000'
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('chat')
   const [messages, setMessages] = useState([])
-  const [darkMode, setDarkMode] = useState(false)
+  const [allMessages, setAllMessages] = useState([])
+  const [sessionId, setSessionId] = useState(newSessionId)
+  const [darkMode, setDarkMode] = useState(() =>
+    window.matchMedia('(prefers-color-scheme: dark)').matches
+  )
   const [user, setUser] = useState(null)
   const [profileOpen, setProfileOpen] = useState(false)
   const [editContact, setEditContact] = useState('')
@@ -19,12 +23,26 @@ export default function App() {
   const [editMsg, setEditMsg] = useState('')
   const profileRef = useRef(null)
 
+  const fetchHistory = async (token) => {
+    try {
+      const res = await fetch(`${API_URL}/conversations`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      })
+      if (!res.ok) return
+      const data = await res.json()
+      setAllMessages(data.map((r, i) => ({ id: i, role: r.role, content: r.message, mood_label: r.mood_label, crisis_tier: r.crisis_tier, timestamp: r.timestamp })))
+    } catch { }
+  }
+
   // Restore session
   useEffect(() => {
     const token = localStorage.getItem('mb_token')
     const stored = localStorage.getItem('mb_user')
     if (token && stored) {
-      try { setUser(JSON.parse(stored)) } catch { }
+      try {
+        setUser(JSON.parse(stored))
+        fetchHistory(token)
+      } catch { }
     }
   }, [])
 
@@ -44,6 +62,8 @@ export default function App() {
     const u = { user_id: data.user_id, name: data.name, email: data.email, emergency_contact: data.emergency_contact }
     setUser(u)
     setEditContact(data.emergency_contact || '')
+    const token = localStorage.getItem('mb_token')
+    if (token) fetchHistory(token)
   }
 
   const handleLogout = () => {
@@ -51,6 +71,7 @@ export default function App() {
     localStorage.removeItem('mb_user')
     setUser(null)
     setMessages([])
+    setAllMessages([])
     setProfileOpen(false)
   }
 
@@ -75,6 +96,25 @@ export default function App() {
     } finally {
       setEditSaving(false)
     }
+  }
+
+  const handleNewChat = async () => {
+    try {
+      const token = localStorage.getItem('mb_token')
+      await fetch(`${API_URL}/clear-session`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', ...(token ? { 'Authorization': `Bearer ${token}` } : {}) },
+        body: JSON.stringify({ session_id: sessionId })
+      })
+    } catch { }
+    setAllMessages(prev => {
+      const existingIds = new Set(prev.map(m => m.id))
+      const newOnes = messages.filter(m => !existingIds.has(m.id))
+      return [...prev, ...newOnes]
+    })
+    setMessages([])
+    setSessionId(newSessionId())
+    setActiveTab('chat')
   }
 
   const toggleTheme = () => setDarkMode(d => !d)
@@ -107,6 +147,7 @@ export default function App() {
               <button className={`nav-tab ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')}>
                 Mood Dashboard
               </button>
+
             </nav>
 
             {/* Profile dropdown */}
@@ -140,31 +181,45 @@ export default function App() {
                     </button>
                   </div>
 
+                  <div className="profile-theme-row">
+                    <span className="profile-label">{darkMode ? '🌙 Dark Mode' : '☀️ Light Mode'}</span>
+                    <button className="profile-theme-toggle" onClick={toggleTheme}>
+                      {darkMode ? 'Switch to Light' : 'Switch to Dark'}
+                    </button>
+                  </div>
+
                   <button className="profile-logout" onClick={handleLogout}>
                     Sign Out
                   </button>
                 </div>
               )}
             </div>
-
-            <button className="theme-toggle" onClick={toggleTheme} title={darkMode ? 'Light mode' : 'Dark mode'}>
-              {darkMode ? '☀️' : '🌙'}
-            </button>
           </div>
         </div>
-        <div className="header-disclaimer">{DISCLAIMER}</div>
       </header>
 
-      <main className="app-main">
+      <div className="app-body">
+        <div className="new-chat-corner">
+          <button className="new-chat-sidebar-btn" onClick={handleNewChat}>
+            <span className="new-chat-plus">+</span>
+            <span>New Chat</span>
+          </button>
+        </div>
+
+        <main className="app-main">
         {activeTab === 'chat' ? (
-          <ChatWindow messages={messages} setMessages={setMessages} sessionId={SESSION_ID} user={user} />
+          <div className="chat-main-wrap">
+            <ChatWindow messages={messages} setMessages={setMessages} sessionId={sessionId} user={user} />
+          </div>
         ) : (
-          <MoodDashboard messages={messages} />
+          <MoodDashboard messages={[...allMessages, ...messages.filter(m => !allMessages.find(a => a.id === m.id))]} />
         )}
-      </main>
+        </main>
+      </div>
 
       <footer className="app-footer">
-        <p>{DISCLAIMER}</p>
+        <span className="footer-disclaimer-icon">⚠️</span>
+        <p className="footer-disclaimer">{DISCLAIMER}</p>
       </footer>
     </div>
   )
