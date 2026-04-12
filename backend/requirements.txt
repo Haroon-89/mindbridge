@@ -20,13 +20,13 @@ langchain-core==1.2.21
 langchain-google-genai==4.2.1
 
 # Sentiment
-transformers==4.41.2
-torch==2.3.1+cpu
-tokenizers==0.19.1
+transformers==4.46.3
+torch==2.11.0+cpu
+tokenizers==0.20.3
 
 # RAG
 chromadb==1.5.5
-sentence-transformers==5.3.0
+sentence-transformers==3.0.1
 
 # SMS
 twilio==9.10.4
