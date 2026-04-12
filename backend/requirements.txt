@@ -20,9 +20,9 @@ langchain-core==1.2.21
 langchain-google-genai==4.2.1
 
 # Sentiment
-transformers==4.46.3
+transformers>=4.46.3
 torch==2.11.0+cpu
-tokenizers==0.20.3
+tokenizers>=0.21.0
 
 # RAG
 chromadb==1.5.5
